@@ -1,22 +1,12 @@
 #include<stdio.h>
 
-void Accept(int iNo)
-{
-    int iCnt = 0;
+//RODATA  read only in data 
 
-    for ( iCnt = 1; iCnt <= 5; iCnt++)
-    {
-        printf("*");
-    }
-    
-}
-
+//
 int main()
 {
-    int iValue = 0;
-    iValue = 5;
-
-    Accept(iValue);
+    char *p = "hello";
+    p[0] = 'H';
 
     return(0);
 }

@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//creation of LL
 struct node
 {
     int data;
@@ -13,11 +14,9 @@ typedef struct node ** PPNODE;
 
 int main()
 {
-    PNODE Head = NULL;
-    //struct node *Head = NULL;
+    struct node *Head = NULL;
 
-    NODE obj;
-    //struct node obj;
+    struct node obj;
 
     return 0;
 }

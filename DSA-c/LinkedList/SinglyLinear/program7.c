@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//InsertFirst, InsertLast, Display, count, DeleteFirst, DeleteLast
+
 struct node
 {
     int data;
@@ -55,7 +57,7 @@ void InsertLast(PPNODE First, int No)
         }
         temp -> next = newn;
     }
-}   // O(N)
+}  
 
 void Display(PNODE First)
 {
@@ -65,7 +67,7 @@ void Display(PNODE First)
         First = First -> next;
     }
     printf("NULL\n");
-} // O(N)
+} 
 
 int Count(PNODE First)
 {
@@ -77,7 +79,56 @@ int Count(PNODE First)
         First = First -> next;
     }
     return iCnt;
-} // O(N)
+} 
+
+void DeleteFirst(PPNODE First)
+{
+    PNODE temp = NULL;
+
+    if(*First == NULL)    // Case 1
+    {
+        printf("Unable to delete as LL is empty\n");
+        return;
+    }
+    else if((*First) -> next == NULL) // Case 2
+    {
+        free(*First);
+        *First = NULL;
+    }
+    else    // Case 3
+    {
+        temp = *First;
+        *First = (*First) -> next;
+        free(temp);
+    }
+}
+
+void DeleteLast(PPNODE First)
+{
+    PNODE temp = NULL;
+
+    if(*First == NULL)    // Case 1
+    {
+        printf("Unable to delete as LL is empty\n");
+        return;
+    }
+    else if((*First) -> next == NULL) // Case 2
+    {
+        free(*First);
+        *First = NULL;
+    }
+    else    // Case 3
+    {
+        temp = *First;
+
+        while(temp->next->next != NULL)
+        {
+            temp = temp -> next;
+        }
+        free(temp->next);
+        temp->next = NULL;
+    }
+}
 
 int main()
 {
@@ -92,6 +143,14 @@ int main()
     InsertLast(&Head, 111);
     InsertLast(&Head, 121);
     
+    Display(Head);
+    iRet = Count(Head);
+
+    printf("Number of elements are : %d\n",iRet);
+
+
+    DeleteLast(&Head);
+
     Display(Head);
     iRet = Count(Head);
 

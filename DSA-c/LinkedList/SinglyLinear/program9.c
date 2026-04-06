@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//InsertFirst, InsertLast, Display, count, DeleteFirst, DeleteLast, InsertAtPoss, DeleteAtPos
+
 struct node
 {
     int data;
@@ -29,7 +31,7 @@ void InsertFirst(PPNODE First, int No)
         newn->next = *First;
         *First = newn;
     }
-}   // O(1)
+}   
 
 void InsertLast(PPNODE First, int No)
 {
@@ -55,7 +57,7 @@ void InsertLast(PPNODE First, int No)
         }
         temp -> next = newn;
     }
-}   // O(N)
+}  
 
 void Display(PNODE First)
 {
@@ -65,7 +67,7 @@ void Display(PNODE First)
         First = First -> next;
     }
     printf("NULL\n");
-} // O(N)
+} 
 
 int Count(PNODE First)
 {
@@ -77,23 +79,23 @@ int Count(PNODE First)
         First = First -> next;
     }
     return iCnt;
-} // O(N)
+} 
 
 void DeleteFirst(PPNODE First)
 {
     PNODE temp = NULL;
 
-    if(*First == NULL)    // Case 1
+    if(*First == NULL)    
     {
         printf("Unable to delete as LL is empty\n");
         return;
     }
-    else if((*First) -> next == NULL) // Case 2
+    else if((*First) -> next == NULL) 
     {
         free(*First);
         *First = NULL;
     }
-    else    // Case 3
+    else    
     {
         temp = *First;
         *First = (*First) -> next;
@@ -105,17 +107,17 @@ void DeleteLast(PPNODE First)
 {
     PNODE temp = NULL;
 
-    if(*First == NULL)    // Case 1
+    if(*First == NULL)   
     {
         printf("Unable to delete as LL is empty\n");
         return;
     }
-    else if((*First) -> next == NULL) // Case 2
+    else if((*First) -> next == NULL) 
     {
         free(*First);
         *First = NULL;
     }
-    else    // Case 3
+    else    
     {
         temp = *First;
 
@@ -170,6 +172,46 @@ void InsertAtPos(PPNODE First, int No, int iPos)
     }
 }
 
+void DeleteAtPos(PPNODE First, int iPos)
+{
+    int iLength = 0;
+    int i = 0;
+
+    PNODE temp1 = NULL;
+    PNODE temp2 = NULL;
+
+    iLength = Count(*First);
+
+    if((iPos < 1) || (iPos > iLength))
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        DeleteFirst(First);
+    }
+    else if(iPos == iLength)
+    {
+        DeleteLast(First);
+    }
+    else
+    {
+        temp1 = *First;
+
+        for(i = 1; i < iPos -1; i++)
+        {
+            temp1 = temp1 -> next;
+        }
+
+        temp2 = temp1 -> next;
+
+        temp1->next = temp2 -> next;
+        free(temp2);
+    }
+}
+
 int main()
 {
     PNODE Head = NULL;
@@ -188,21 +230,13 @@ int main()
     
     Display(Head);
     iRet = Count(Head);
+    printf("Number of elements are : %d\n",iRet);
+
+    DeleteAtPos(&Head, 5);
+
+    Display(Head);
+    iRet = Count(Head);
+    printf("Number of elements are : %d\n",iRet);
 
     return 0;
 }
-
-/*
-    for(i = 0; i < n; i++)  O(n)
-
-    for(i = 0; i < n; i = i +2)  O(n)
-
-    for(i = n; i > 1; i--)  O(n)
-
-    for(i = 1; i < n; i = i * 2)  O(log n base 2)
-
-    for(i = 1; i < n; i = i * 3)  O(log n base 3)
-
-    for(i = n; i > 1; i = i / 2)  O(log n base 2)
-
-*/

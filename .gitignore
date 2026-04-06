@@ -4,6 +4,7 @@
 *.exe
 *.out
 *.o
+*.class
 
 # Editor / temp files
 *.swp
